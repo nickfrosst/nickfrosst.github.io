@@ -1,0 +1,5 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Nick Frosst's personal site"
+theme = "book"
+BookMenuBundle = "/menu" 
