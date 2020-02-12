@@ -6,7 +6,7 @@ I am a computer scientist working on neural networks, and a musician playing in 
 
 I was the first employee of Geoffrey Hinton's Google Brain lab in Toronto. I worked on neural network reserach there for 3 years, focusing on capsule networks, adversarial examples, and explanability. 
 
-Currently I am working on something somewhat secret. Please get in touch if you are looking for work and are interesting in big neural nets for language. 
+Currently I am working on something somewhat [secret](https://secant.ai/). Please get in touch if you are looking for work and are interesting in big neural nets for language. 
 
 I sing in an indie pop rock band called Good Kid. We play toronto frequently, and elsewhere occasionaly including LA and New York.
 
