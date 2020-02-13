@@ -35,7 +35,6 @@ function getHeight() {
 
 
 function resizeCanvas(width, height) {
-	console.log(window.innerWidth, window.innerHeight);
 	var canvas$ = $('canvas');
 	canvas$.attr('width', getWidth());
 	canvas$.attr('height', getHeight());
