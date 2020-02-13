@@ -17,9 +17,7 @@ function checkForCanvasSupport() {
 }
 function getWidth() {
 	return Math.max(
-		document.body.scrollWidth,
 		document.documentElement.scrollWidth,
-		document.body.offsetWidth,
 		document.documentElement.offsetWidth,
 		document.documentElement.clientWidth
 	);
@@ -27,30 +25,16 @@ function getWidth() {
 
 function getHeight() {
 	return Math.max(
-		document.body.scrollHeight,
 		document.documentElement.scrollHeight,
-		document.body.offsetHeight,
 		document.documentElement.offsetHeight,
 		document.documentElement.clientHeight
 	);
 }
 
-console.log('Width:  ' + getWidth());
-console.log('Height: ' + getHeight());
 
 function resizeCanvas(width, height) {
-	console.log("YOLO")
+	console.log(window.innerWidth, window.innerHeight)
 	var canvas$ = $('canvas');
-
-	if ('undefined' == typeof (height)) {
-		height = getWidth();//$('.giphy-embed').width();
-	}
-	canvas$.attr('height', height);
-
-	if ('undefined' == typeof (width)) {
-		width = getWidth;//$('.giphy-embed').width();
-	}
-	canvas$.attr('width', width);
-
-}
-;
+	canvas$.attr('width', window.innerWidth);
+	canvas$.attr('height', window.innerHeight);
+};

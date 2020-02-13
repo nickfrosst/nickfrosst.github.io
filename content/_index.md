@@ -2,7 +2,7 @@
 title: "Nicholas Frosst"
 date: 2020-02-07T15:52:44-05:00
 --- 
-I am a computer scientist working on neural networks, and a musician playing in an indie pop rock band.
+I am a computer scientist working on [neural networks](https://scholar.google.ca/citations?user=1yVnaTgAAAAJ&hl=en), and a musician playing in an [indie pop rock band](https://open.spotify.com/artist/38SKxCyfrmNWqWunb9wGHP).
 
 I was the first employee of Geoffrey Hinton's Google Brain lab in Toronto. I worked on neural network reserach there for 3 years, focusing on capsule networks, adversarial examples, and explanability. 
 
@@ -14,4 +14,4 @@ I did my undergrad in Computer Science and Cognitive Science at U of T. During t
 
 If you are curious about the birds, see [this](https://nickfrosst.github.io/flock_dynamics/)
 
-I can be contacted [here](TODO)
+I can be contacted at nickfrosst at gmail or on [twitter](https://twitter.com/nickfrosst)

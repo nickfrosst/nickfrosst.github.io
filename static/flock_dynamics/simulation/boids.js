@@ -1,5 +1,4 @@
 $(function (name) {
-	console.log(this);
 
 	if (!checkForCanvasSupport()) {
 		return;
