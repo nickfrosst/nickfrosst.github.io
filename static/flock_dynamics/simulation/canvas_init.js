@@ -19,7 +19,8 @@ function getWidth() {
 	return Math.max(
 		document.documentElement.scrollWidth,
 		document.documentElement.offsetWidth,
-		document.documentElement.clientWidth
+		document.documentElement.clientWidth,
+		window.innerWidth
 	);
 }
 
@@ -27,14 +28,15 @@ function getHeight() {
 	return Math.max(
 		document.documentElement.scrollHeight,
 		document.documentElement.offsetHeight,
-		document.documentElement.clientHeight
+		document.documentElement.clientHeight,
+		window.innerHeight
 	);
 }
 
 
 function resizeCanvas(width, height) {
-	console.log(window.innerWidth, window.innerHeight)
+	console.log(window.innerWidth, window.innerHeight);
 	var canvas$ = $('canvas');
-	canvas$.attr('width', window.innerWidth);
-	canvas$.attr('height', window.innerHeight);
+	canvas$.attr('width', getWidth());
+	canvas$.attr('height', getHeight());
 };
