@@ -10,7 +10,7 @@ Currently I am working on something somewhat [secret](https://secant.ai/). Pleas
 
 I sing in an indie pop rock band called Good Kid. We play toronto frequently, and elsewhere occasionaly.
 
-I did my undergrad in Computer Science and Cognitive Science at U of T. During this time I had the chance to do research with [John Tsotsos](http://www.cse.yorku.ca/~tsotsos/Tsotsos/Home.html), [Sonja Fidler](https://www.cs.utoronto.ca/~fidler/), [Jimmy Ba](https://jimmylba.github.io/), [John Vervaeke](https://cwsl.ca/team-view/john-vervaeke/), [Orion Buske](http://www.cs.toronto.edu/~buske/), and [Gary Baumgartner].(http://www.cs.toronto.edu/~gfb/)
+I did my undergrad in Computer Science and Cognitive Science at U of T. During this time I had the chance to do research with [John Tsotsos](http://www.cse.yorku.ca/~tsotsos/Tsotsos/Home.html), [Sonja Fidler](https://www.cs.utoronto.ca/~fidler/), [Jimmy Ba](https://jimmylba.github.io/), [John Vervaeke](https://cwsl.ca/team-view/john-vervaeke/), [Orion Buske](http://www.cs.toronto.edu/~buske/), and [Gary Baumgartner](http://www.cs.toronto.edu/~gfb/).
 
 I can be contacted at nickfrosst at gmail or on [twitter](https://twitter.com/nickfrosst)
 
