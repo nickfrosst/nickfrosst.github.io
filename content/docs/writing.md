@@ -21,3 +21,6 @@ Other:
 [Flock Dynamics and Societal Catastrophe: an essay with javascript fidgets](https://nickfrosst.github.io/flock_dynamics/)
 
 [Lyrics](https://genius.com/artists/Good-kid)
+
+
+A Progressive Approach to Digital Tech - Taking Charge of Europe’s Digital Future, authored by the European progressive political foundation, I gave feedback and editing help(https://www.feps-europe.eu/resources/publications/717-a-progressive-approach-to-digital-tech-taking-charge-of-europe%E2%80%99s-digital-future.html)
