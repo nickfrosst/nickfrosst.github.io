@@ -4,7 +4,7 @@ date: 2020-02-07T15:52:44-05:00
 --- 
 I am a [computer scientist]((https://scholar.google.ca/citations?user=1yVnaTgAAAAJ&hl=en)) and [musician]((https://open.spotify.com/artist/38SKxCyfrmNWqWunb9wGHP)). 
 
-In 2020, I co-founded [Cohere](https://cohere.ai/) with Aidan Gomez and Ivan Zhang. We aim to build machines that understand the world, and make them safe, accessible, and useful. 
+In 2020, I co-founded [Cohere](https://cohere.ai/) with Aidan Gomez and Ivan Zhang. I am currently the CTO. We train large language models, and make them safe, accessible, and useful. 
 
 I was the first employee of [Geoffrey Hinton](https://www.cs.toronto.edu/~hinton/)'s Google Brain lab in Toronto. I worked on machine learning research there for 3 years, focusing on capsule networks, adversarial examples, and explainability. 
 
