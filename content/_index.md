@@ -6,7 +6,7 @@ I am a [computer scientist]((https://scholar.google.ca/citations?user=1yVnaTgAAA
 
 In 2020, I co-founded [Cohere](https://cohere.ai/) with Aidan Gomez and Ivan Zhang. We aim to build machines that understand the world, and make them safe, accessible, and useful. 
 
-I was the first employee of [Geoffrey Hinton](https://www.cs.toronto.edu/~hinton/)'s Google Brain lab in Toronto. I worked on machine learning research there for 3 years, focusing on capsule networks, adversarial examples, and explanability. 
+I was the first employee of [Geoffrey Hinton](https://www.cs.toronto.edu/~hinton/)'s Google Brain lab in Toronto. I worked on machine learning research there for 3 years, focusing on capsule networks, adversarial examples, and explainability. 
 
 I did my undergrad in Computer Science and Cognitive Science at U of T. During this time I had the chance to work with [John Tsotsos](http://www.cse.yorku.ca/~tsotsos/Tsotsos/Home.html), [Sanja Fidler](https://www.cs.utoronto.ca/~fidler/), [Jimmy Ba](https://jimmylba.github.io/), [John Vervaeke](https://cwsl.ca/team-view/john-vervaeke/), [Orion Buske](http://www.cs.toronto.edu/~buske/), and [Gary Baumgartner](http://www.cs.toronto.edu/~gfb/).
 
