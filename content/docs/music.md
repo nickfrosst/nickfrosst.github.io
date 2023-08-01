@@ -3,7 +3,7 @@ title: "music"
 date: 2020-02-07T15:52:44-05:00
 ---
 
-I play in an indie pop rock band called Good Kid. We play fast paced good time music :)
+I play in an indie pop rock band called Good Kid. We play fast paced good time music :) We do a few tours a year, in north america and europe.
 
 some links:
 [spotify](https://open.spotify.com/artist/38SKxCyfrmNWqWunb9wGHP)
