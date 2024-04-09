@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <style>
+        :root {
+            --primary-color: #1a202c;
+            --secondary-color: #333;
+            --light-color: #fff;
+            --dark-color: #000;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            display: flex;
+            height: 100vh;
+            flex-direction: row;
+        }
+
+        #chat-panel,
+        #iframe-panel {
+            height: 100vh;
+            width: 500%;
+            overflow-y: scroll;
+        }
+
+        #chat-panel {
+            flex: 1;
+            border-right: 3px solid var(--secondary-color);
+            padding: 10px;
+            max-width: 25%;
+            height: 100%;
+            word-break: break-all;
+            overflow-y: scroll;
+        }
+
+        #chat-messages {
+            border-bottom: 1px solid var(--secondary-color);
+        }
+
+        #chat-input {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--light-color);
+            border: none;
+            border-bottom: 1px solid var(--secondary-color);
+            max-width: 100%;
+            /* Ensure the input field doesn't have a maximum width */
+        }
+
+        #iframe-panel {
+            flex: 1;
+        }
+
+        #pre {
+            word-break: break-all;
+        }
+
+        #opening-section {
+            margin-bottom: 10px;
+            word-break: break-word;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        #chat-input:focus {
+            outline: none;
+        }
+
+        .language-html {
+            text-wrap: wrap;
+            overflow-wrap: always;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="chat-panel">
+            <div id="opening-section">
+                <p>Build Websites with command-r-plus</p>
+                <p>Add in your Cohere API key to get started</p>
+            </div>
+            <hr> <!-- Divider -->
+            <input id="cohere-api-key" type="text" placeholder="Cohere API key - required" style="width: 100%;">
+            <input id="pexels-api-key" type="text" placeholder="Pexels API key - optional for images"
+                style="width: 100%;">
+            <hr> <!-- Divider -->
+            <div id="chat-messages" markdown="1">
+            </div>
+            <input id="chat-input" type="text" placeholder="Type your message...">
+        </div>
+
+        <!-- Iframe Panel -->
+        <div id="iframe-panel">
+            <iframe id='actual-iframe' width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+    </div>
+</body>
+<script type="module" src="https://md-block.verou.me/md-block.js"></script>
+
+<script>
+    function generateUUID() { // Public Domain/MIT
+        var d = new Date().getTime();//Timestamp
+        var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16;//random number between 0 and 16
+            if (d > 0) {//Use timestamp until depleted
+                r = (d + r) % 16 | 0;
+                d = Math.floor(d / 16);
+            } else {//Use microseconds since page-load if supported
+                r = (d2 + r) % 16 | 0;
+                d2 = Math.floor(d2 / 16);
+            }
+            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+    }
+
+    const conversation_id = generateUUID();
+
+    // Basic chat input functionality
+    document.getElementById('chat-input').addEventListener('keypress', function (event) {
+        if (event.key === 'Enter' && this.value.trim() !== '') {
+            const message = this.value;
+            const messageElement = document.createElement('md-block');
+            messageElement.textContent = 'You: ' + message;
+            //set color to dark blue
+            messageElement.style.color = 'blue';
+            //messageElement.width = '100px';
+            document.getElementById('chat-messages').appendChild(messageElement);
+            this.value = '';
+            cohereChatStream(message);
+        }
+    });
+
+    async function* parseJsonStream(readableStream) {
+        for await (const line of readLines(readableStream.getReader())) {
+            const trimmedLine = line.trim().replace(/,$/, '');
+
+            if (trimmedLine !== '[' && trimmedLine !== ']') {
+                yield JSON.parse(trimmedLine);
+            }
+        }
+    }
+
+    async function* readLines(reader) {
+        const textDecoder = new TextDecoder();
+        let partOfLine = '';
+        for await (const chunk of readChunks(reader)) {
+            const chunkText = textDecoder.decode(chunk);
+            const chunkLines = chunkText.split('\n');
+            if (chunkLines.length === 1) {
+                partOfLine += chunkLines[0];
+            } else if (chunkLines.length > 1) {
+                yield partOfLine + chunkLines[0];
+                for (let i = 1; i < chunkLines.length - 1; i++) {
+                    yield chunkLines[i];
+                }
+                partOfLine = chunkLines[chunkLines.length - 1];
+            }
+        }
+    }
+
+    function readChunks(reader) {
+        return {
+            async*[Symbol.asyncIterator]() {
+                let readResult = await reader.read();
+                while (!readResult.done) {
+                    yield readResult.value;
+                    readResult = await reader.read();
+                }
+            },
+        };
+    }
+
+    async function cohereChatStream(message) {
+        const apiKey = document.getElementById('cohere-api-key').value;
+        const responseElement = createEmptyResponse();
+        fetch('https://api.cohere.ai/v1/chat', {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`, // Use the API key provided by the user
+            },
+            body: JSON.stringify({
+                'model': 'command-r-plus',
+                'message': message,
+                'temperature': 0.5,
+                'stream': true,
+                'conversation_id': conversation_id,
+                'preamble_override': 'You are a brilliant HTML programmer.\n' +
+                    'You have been coding for 20 years! Please respond to every request with a complete and perfect HTML website.\n' +
+                    'Put all code in a single markdown code block.\n' +
+                    'Make sure that all images have an alt, height, and width defined."'
+            })
+        }).then(async (response) => {
+            // response.body is a ReadableStream
+            for await (const chunk of parseJsonStream(response.body)) {
+                updateResponse(responseElement, chunk);
+            }
+        });
+    };
+
+    function createEmptyResponse() {
+        const messageElement = document.createElement('md-block');
+        messageElement.textContent = 'AI: '
+        document.getElementById('chat-messages').appendChild(messageElement);
+        return messageElement;
+    }
+
+    function updateResponse(response, chunk) {
+        if (chunk.text) {
+            response.textContent = response.textContent + chunk.text;
+        }
+        if (chunk.is_finished) {
+            response.remove();
+
+            const messageElement = document.createElement('md-block');
+            messageElement.textContent = 'AI: ' + chunk.response.text;
+            messageElement.style.overflowX = 'auto';
+            messageElement.style.whiteSpace = 'nowrap';
+            document.getElementById('chat-messages').appendChild(messageElement);
+
+            var { plainText, html } = splitPlainTextAndHtmlCode(chunk.response.text);
+            var iframe = document.getElementById('actual-iframe');
+            var script = "<script>" + getImage.toString() + "<\/script>";
+            html = addOnErrorToImg(html);
+            var blob = new Blob([html + script], { type: 'text/html' });
+            var blobURL = URL.createObjectURL(blob);
+            iframe.sandbox.add('allow-scripts');
+            iframe.src = blobURL;
+
+        }
+    }
+
+    function addOnErrorToImg(html) {
+        //add an onError=getImage(this) to all img elements in the html string
+        //this is a hacky way to do it but it works
+        const regex = /<img([\s\S]+?)>/g;
+        const imgElements = html.match(regex);
+        if (imgElements) {
+            for (let i = 0; i < imgElements.length; i++) {
+                const imgElement = imgElements[i];
+                const newImgElement = imgElement.replace('>', ' onError="getImage(this)">');
+                html = html.replace(imgElement, newImgElement);
+            }
+        }
+        return html;
+    }
+
+    function getImage(element) {
+        console.log(element.alt)
+        console.log(element);
+
+        return fetch('https://api.pexels.com/v1/search?query=' + element.alt + '&per_page=1&total_results=1', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'JMr4ZI1Ap8UmPwuPbFBjjNzvnzD3urK7l8EQTpHa66PdDhOOfebAe426',
+            },
+            // We are not sending any data in the request, so we use null as the body.
+        })
+            .then(response => response.json())
+            .then(data => {
+                element.src = data['photos'][0]['src']['original'];
+                this.src = data['photos'][0]['src']['original'];
+
+            });
+    }
+
+    function splitPlainTextAndHtmlCode(plainString) {
+        const regex = /```(html)?([\s\S]+?)```/;
+        //capture only the code in the markdown block exlcuding the html tag
+        const code = plainString.match(regex);
+        const plainText = plainString.replace(regex, '');
+        const html = code[2];
+        return {
+            plainText,
+            html
+        };
+    };
+
+
+</script>
+
+</body>
+
+</html>
