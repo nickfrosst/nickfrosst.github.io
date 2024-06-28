@@ -12,4 +12,3 @@ I did my undergrad in Computer Science and Cognitive Science at U of T. During t
 
 I can be contacted at nickfrosst at gmail or on [twitter](https://twitter.com/nickfrosst)
 
-If you are curious about the birds, see [this](https://nickfrosst.github.io/flock_dynamics/)
